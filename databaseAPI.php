@@ -53,7 +53,8 @@ class databaseAPI
                 'name'=>$row["name"],
                 'price' => $row["price"],
                 'quantity' =>$row["quantity"],
-                'imageUrl' =>$row["imageUrl"]
+                'imageUrl' =>$row["imageUrl"],
+                'product_id' =>$row["product_id"]
             ];
             array_push($arr,$item);
         }
@@ -61,6 +62,78 @@ class databaseAPI
     }
 
 
+    public function addNewCartLine($order_id, $product_name,$quantity)
+    {
+        $product_id = -1;
+        $res =  $this->getAllProducts();
+        foreach ($res as $item){
+            if($item['name'] == $product_name)
+                $product_id = $item['product_id'];
+        }
+        if($product_id == -1){
+            echo 'product doesnt exist ' . $product_name;
+            die();
+        }
+
+        try {
+            $query = "INSERT INTO cart_list (order_id,product_id,quantity) VALUES (:order_id, :product_id, :quantity)";
+            $stmt = $this->conn->prepare($query);
+
+            $stmt->bindParam(':order_id', $order_id);
+            $stmt->bindParam(':product_id',$product_id);
+            $stmt->bindParam(':quantity  ',$quantity);
+            $stmt->execute();
+
+            return $this->conn->lastInsertId();
+        } catch (PDOException $e) {
+            echo 'error writing new cart line';
+        }
+    }
+    public function getNewOrderId($customerId)
+    {
+        try {
+            // Экранируем специальные символы в строках
+            $customerId = addslashes($customerId);
+
+            $query = "INSERT INTO orders (customer_id) VALUES (:customer_id)";
+            $stmt = $this->conn->prepare($query);
+
+            $stmt->bindParam(':customer_id', $customerId);
+            $stmt->execute();
+
+            $order_id = $this->conn->lastInsertId();
+            echo "Order succesfully created. ID: ${customerId}";
+            return $order_id;
+        } catch (PDOException $e) {
+            echo "Error adding New Order: " . $e->getMessage();
+        }
+    }
+    public function getNewCustomerId($name, $email, $phone, $address)
+    {
+        try {
+            $name = addslashes($name);
+            $email = addslashes($email);
+            $phone = addslashes($phone);
+            $address = addslashes($address);
+
+
+            $query = "INSERT INTO customers (fullname, email, phone,address) VALUES (:fullname, :email,:phone,:address)";
+            $stmt = $this->conn->prepare($query);
+
+            $stmt->bindParam(':fullname', $name);
+            $stmt->bindParam(':email', $email);
+            $stmt->bindParam(':phone', $phone);
+            $stmt->bindParam(':address', $address);
+
+            $stmt->execute();
+
+            $customer_id = $this->conn->lastInsertId();
+            echo "New Customer added successfully. ID: ${customer_id}";
+            return $customer_id;
+        } catch (PDOException $e) {
+            echo "Error adding New Customer: " . $e->getMessage();
+        }
+    }
 }
 
 

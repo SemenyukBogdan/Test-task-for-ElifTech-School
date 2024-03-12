@@ -1,10 +1,12 @@
 <?php
 require_once 'databaseAPI.php';
+
 $cartTemplate = file_get_contents("./view/components/cart.html");
 $cardTemplate = file_get_contents("./view/card.html");
 $navBarTemplate = file_get_contents("./view/components/navbar.html");
 $footerTemplate = file_get_contents("./view/components/footer.html");
 $cartItemTemplate = file_get_contents('./view/cartItem.html');
+$head = file_get_contents('./view/components/head.html');
 
 $db = new databaseAPI();
 
@@ -36,18 +38,7 @@ foreach ($res as $item){
 <!doctype html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-
-    <link rel="stylesheet" href="style.css">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Madimi+One&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Press+Start+2P&family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-
-    
+    <?=$head?>
     <script src="script.js" defer></script>
 </head>
 <body>
@@ -71,12 +62,23 @@ foreach ($res as $item){
                 <button class="btn btn-primary" type="button">etc.</button>
                 <button class="btn btn-primary" type="button">etc.</button>
             </div>
+            <div class="btn-group dropdown">
+                <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    sort by
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" id="sortByLetter" href="#">letter</a></li>
+                    <li><a class="dropdown-item" id="sortByPrice" href="#">price</a></li>
+                </ul>
+            </div>
         </div>
 
         <section class="cards col-md-10 col-sm-8">
         <?php
         echo  $template;
         ?>
+<!--            <div class="space_filler"></div>-->
+
         </section>
 
 
@@ -101,9 +103,11 @@ foreach ($res as $item){
 
 <div id="bottomLine">
     <span id="totalPriceLabel">Total price : 0</span>
-    <button id="submitButton" type="button" class="btn btn-success">Submit order</button>
-
+    <button id="submitButton" type="submit" form="cartForm" class="btn btn-success">Submit order</button>
+    
 </div>
+
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>

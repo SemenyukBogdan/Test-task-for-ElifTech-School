@@ -1,23 +1,28 @@
-<div class="row">
-    <div class="customerDetails col-md-3">
-        <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">name</label>
-            <input type="email" class="form-control" id="nameInput" placeholder="">
+<form id="cartForm" action="../successOrderPage.php" method="post">
+    <div class="row">
+        <div class="customerDetails col-md-3">
+            <div class="mb-3">
+                <label for="nameInput" class="form-label">name</label>
+                <input name="nameInput" type="text" class="form-control" id="nameInput" placeholder="">
+            </div>
+            <div class="mb-3">
+                <label for="emailInput" class="form-label">Email address</label>
+                <input name="emailInput" type="email" class="form-control" id="emailInput" placeholder="name@example.com">
+            </div>
+            <div class="mb-3">
+                <label for="PhoneInput" class="form-label">phone</label>
+                <input name="PhoneInput" type="text" class="form-control" id="PhoneInput" placeholder="">
+            </div>
+            <div class="mb-3">
+                <label for="addressInput" class="form-label">address</label>
+                <input name="addressInput" type="text" class="form-control" id="addressInput" placeholder="">
+            </div>
+            <div class="hidden">
+                <input name="cartListJson" id="cartListJson">
+            </div>
         </div>
-        <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">Email address</label>
-            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-        </div>
-        <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">phone</label>
-            <input type="email" class="form-control" id="PhoneInput" placeholder="">
-        </div>
-        <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">adress</label>
-            <input type="email" class="form-control" id="adressInput" placeholder="">
-        </div>
-    </div>
-    <div class="cart col-md-8">
+        <div class="cart col-md-8">
 
+        </div>
     </div>
-</div>
+</form>
