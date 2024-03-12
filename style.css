@@ -1,0 +1,161 @@
+body  {
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(0,150,96,1) 100%);
+}
+
+
+body * {
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 200;
+    font-style: normal;
+}
+
+
+
+
+.categoryes{
+    border: 1px solid black;
+    border-radius: 15px;
+    min-width: 120px;
+    text-align: center;
+}
+
+.cards{
+    display: flex;
+    flex-wrap: wrap; /* Добавьте это свойство */
+    float: left;
+    overflow: auto;
+    /*justify-content: space-around;*/
+    border:1px solid black;
+}
+.cards .card{
+    max-height: 320px;
+    min-height: 155px;
+    width: calc(100%/5);
+    flex: 1;
+    min-width: 150px;
+    /*margin: 0 10px 10px 10px;*/
+
+    border: 1px solid black;
+    max-width: 330px;
+}
+
+.cards .card h5{
+font-size: 17px;
+}
+
+
+.navbarButtons{
+    display: flex;
+}
+
+.card-body .card-footer{
+    /*border: 0px;*/
+    /*background-color: rosybrown;*/
+    /*display: flex;*/
+    /*position: absolute;*/
+    /*bottom: 0px;*/
+    /*right: 3px;*/
+    border: 0px;
+}
+
+
+
+.card-footer a{
+    position: absolute;
+    bottom: 4px;
+    right: 10px;
+    font-size: 12px;
+    display: block;
+}
+.priceP{
+    position: absolute;
+    left: 15px;
+    bottom: 10px;
+    /*font-size: 12px;*/
+}
+
+
+.hidden{
+ display: none;
+}
+
+footer{
+    /*background-color: #0b5ed7;*/
+    text-align: center;
+    background-color: #0b5ed7;
+    /*background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(0,255,162,1) 100%);*/
+
+    color: rgba(240, 255, 240, 0.88);
+    margin-bottom: 40px;
+}
+
+
+
+.card-body div{
+    display: flex;
+    justify-content: space-between;
+}
+.quantityBlock > input{
+    border-radius: 12px;
+    max-width: 120px;
+    width: calc(60%);
+}
+.card-body div .removeButton button{
+    max-lines: 1;
+    float: right;
+}
+.categoryes p{
+    color: honeydew;
+}
+
+.customerDetails * label{
+    color: aliceblue;
+}
+
+
+.cartItem .card {
+    border: 0px;
+}
+.cartItem  img{
+    border-radius: 4px;
+}
+.cartItem > div{
+    background-color: rgba(2,2,2,0%);
+    box-shadow: 1px 1px 2px rgb(75, 122, 102);
+    color: honeydew;
+    border-radius: 12px;
+}
+
+p> small{
+    color: honeydew;
+}
+
+.card img{
+    max-height: 180px;
+}
+.card-body .card-title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-height: 82px; /* Установите максимальную ширину блока */
+
+}
+
+#bottomLine{
+    /*display: flex;*/
+    display: none;
+    position:fixed;
+    bottom:0;
+    width:100%;
+    background-color: lightslategrey;
+    height: 43px;
+    padding-left: 40%;
+    justify-content: space-around;
+    padding-top: 1px;
+
+}
+
+#totalPriceLabel{
+    margin-top: 8px;
+}

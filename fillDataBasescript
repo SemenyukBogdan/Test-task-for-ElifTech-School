@@ -1,0 +1,45 @@
+
+//$list = [[
+//      'name'=>'Doppelhertz active Omega-3 clean vessels 1000 mg capsules #30 10x3',
+//        'generic_name'=>null,
+//        'price' =>448,
+//        'imageUrl' => 'view/pic/img_0.jpg',
+//        'quantity' =>110
+//    ],
+//    [
+//        'name'=>'Smart Omega for children chewable capsules. No. 30',
+//        'generic_name'=>null,
+//        'price' =>400,
+//        'imageUrl' => 'view/pic/img_0 (1).jpg',
+//         'quantity' =>120
+//    ],
+//    [
+//        'name'=>'Omega-3 1000 mg capsules No. 30 Ronpharm',
+//        'generic_name'=>null,
+//        'price' =>256,
+//        'imageUrl' => 'view/pic/img_0 (2).jpg',
+//         'quantity' =>130
+//    ],
+//    [
+//        'name'=>'Omega-3 NOW 1000 mg soft capsules #30',
+//        'generic_name'=>null,
+//        'price' =>378,
+//        'imageUrl' => 'view/pic/img_0 (3).jpg',
+//         'quantity' =>140
+//    ],
+//    [
+//        'name'=>'Zest Kids Omega lozenges chewable No. 60',
+//        'generic_name'=>null,
+//        'price' =>298,
+//        'imageUrl' => 'view/pic/img_0 (4).jpg',
+//         'quantity' =>150
+//    ],
+//];
+//
+//foreach ($list as $item){
+//    echo $item['name'];
+//    echo $item['price'];
+//    echo $item['quantity'];
+//    echo $item['imageUrl'];
+// $db->addNewProduct($item['name'],$item['price'],$item['quantity'],$item['imageUrl']);
+//}
