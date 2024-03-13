@@ -351,3 +351,63 @@ favorits.forEach((item)=>{
         }
     })
 })
+
+
+
+
+let markers = [{
+    title : 'drugs market',
+    pos:{
+        lat : 50.46484195751556,
+        lng : 30.617492872712045
+    }
+    },{
+    title : 'pharmacy shop',
+    pos:{
+        lat : 50.457499415120765,
+        lng : 30.39588372648565
+    }
+    },
+    {
+        title : 'apteka',
+        pos:{
+            lat : 50.44634999189802,
+            lng : 30.607559790116454
+        }
+    }
+]
+
+async function initMap() {
+    const { Map } = await google.maps.importLibrary("maps");
+    const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
+
+
+    map = new Map(document.getElementById("map"), {
+        center: { lat: 50.45914736480977, lng: 30.499211610449624 },
+        zoom: 11,
+        mapId : "AIzaSyDBVhtE6a4-D4wJU-U9rB4mOIpipeSYbmM"
+    });
+
+    const marker = new AdvancedMarkerElement({
+        map,
+        position: { lat: 37.4239163, lng: -122.0947209 },
+    });
+    markers.forEach((item)=>{
+
+        mapMarkers.push(new AdvancedMarkerElement({
+                map,
+                position: item.pos,
+                title:item.title
+            })
+        );
+
+       
+    })
+
+}
+
+let map;
+initMap();
+let mapMarkers = []
+
+
