@@ -216,3 +216,23 @@ svg{
 
 #map {
 }
+
+/*.dropdown-price{*/
+/*    display: none;*/
+/*}*/
+/*.dropdown-item:hover > .dropdown-price{*/
+/*    display: block;*/
+/*}*/
+
+/*.priceSort + ul{*/
+/*    display: none;*/
+/*}*/
+
+/*.priceSort:hover + ul{*/
+/*    display: block;*/
+/*}*/
+
+/*.priceSortButton{*/
+/*    position: relative;*/
+/*margin-left: 20px;*/
+/*}*/

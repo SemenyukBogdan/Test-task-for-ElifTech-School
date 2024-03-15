@@ -27,12 +27,7 @@ class ShoppingCart{
         saveCartToLocalStorage(this.items)
     }
 
-    // removeItem(index) {
-    //     if (index >= 0 && index < this.items.length) {
-    //         this.items.splice(index, 1);
-    //     }
-    // }
-
+    
     updateQuantity(title, newValue) {
         for(let i =0; i<this.items.length;i++){
             const item = this.items[i]
@@ -44,11 +39,7 @@ class ShoppingCart{
         }
         saveCartToLocalStorage(this.items)
     }
-    //
-    // calculateTotal() {
-    //     return this.items.reduce((total, item) => total + item.price * item.quantity, 0);
-    // }
-
+   
     clearCart() {
         this.items = [];
         localStorage.removeItem('cart')
@@ -232,86 +223,72 @@ function getTitleCard(card){
 function swapCards(card1, card2) {
     const parent = card1.parentElement;
 
-    // Получаем индексы карточек
     const index1 = Array.from(parent.children).indexOf(card1);
     const index2 = Array.from(parent.children).indexOf(card2);
 
-    // Переставляем карточки
     parent.insertBefore(card2, card1);
-    // parent.insertBefore(card1, parent.children[index2 + 1]); // Добавляем +1, чтобы не вставить перед самой собой
 }
 
 
-
-
- function sortCardsByAlphabet(reverseSort = false){
+ function sortCardsBy(bySort,reverseSort = false){
     let cards = Array.from(document.querySelectorAll('.cards .card'));
-    let flag = 1;
 
-     do {
-         flag = 1;
-         for (let i = 1; i < cards.length; i++) {
-             let first_card = cards[i - 1];
-             let second_card = cards[i];
-             if (first_card.querySelector('h5').innerText.toLowerCase() > second_card.querySelector('h5').innerText.toLowerCase()) {
-                 swapCards(first_card, second_card);
+     const cardsNode = document.querySelector('.cards');
+     const fragment = document.createDocumentFragment();
+     const associativ = cards.map(item => ({
+         title: item.querySelector('h5').textContent.toLowerCase(),
+         price: item.querySelector('label.priceP').textContent.toLowerCase(),
+         item: item
+     }));
 
-                 cards = Array.from(document.querySelectorAll('.cards .card'));
+     
+     if (bySort === 'letter'){
+         associativ.sort(function(a, b) {
+             return a.title.localeCompare(b.title, undefined, {sensitivity: 'accent'});
+         });
+     }
+    else if(bySort === 'price'){
+         associativ.sort(function(a, b) {
+             let firstCardPrice = a.item.querySelector('label.priceP').textContent.toLowerCase()
+             let secondCardPrice = b.item.querySelector('label.priceP').textContent.toLowerCase()
 
-                 flag = 0;
-             }
-
-         }
-
-     } while (flag !== 1);
+             firstCardPrice = firstCardPrice.replace('₴','').trim()
+             secondCardPrice = secondCardPrice.replace('₴','').trim()
+             firstCardPrice = parseInt(firstCardPrice)
+             secondCardPrice = parseInt(secondCardPrice)
+             return firstCardPrice - secondCardPrice;
+         });
+     }
     
-    upFavoritCards()
+    
+    if (reverseSort == true){
+        associativ.reverse()
+    }
+     associativ.forEach(item => {
+         fragment.appendChild(item.item);
+     });
+    
+     cardsNode.innerHTML = '';
+     cardsNode.appendChild(fragment);
+
+
+     upFavoritCards()
 }
 
-function sortCardsByPrice(){
-    let cards = Array.from(document.querySelectorAll('.cards .card'));
-    let flag = 1;
-    do {
-        flag = 1;
-        for (let i = 1; i < cards.length; i++) {
-            let firstCard = cards[i - 1];
-            let secondCard = cards[i];
-            
-            let firstCardPrice = firstCard.querySelector('label.priceP').innerText.toLowerCase()
-            let secondCardPrice = secondCard.querySelector('label.priceP').innerText.toLowerCase()
-            
-            firstCardPrice = firstCardPrice.replace('₴','').trim()
-            secondCardPrice = secondCardPrice.replace('₴','').trim()
 
-            
-            firstCardPrice = parseInt(firstCardPrice)
-            secondCardPrice = parseInt(secondCardPrice)
-            
-            // console.log(`${firstCardPrice} > ${secondCardPrice} : ${firstCardPrice > secondCardPrice}`)
-            if (firstCardPrice > secondCardPrice) {
-                swapCards(firstCard, secondCard);
-                
-                cards = Array.from(document.querySelectorAll('.cards .card'));
 
-                flag = 0;
-            }
+document.querySelector('.sort-select').addEventListener('change',(event)=>{
+    const input = event.target.selectedIndex;
+    switch (input) {
+        case 1:sortCardsBy('letter') 
+            break;
+        case 2:sortCardsBy('price');
+            break;
+        case 3:sortCardsBy('price',true)
+            break;
 
-        }
-
-    } while (flag !== 1);
-
-    upFavoritCards()
-}
-document.querySelector('#sortByPrice').addEventListener('click',sortCardsByPrice)
-// sortCardsByAlphabet()
-const sortByLetterButton = document.querySelector('#sortByLetter')
-sortByLetterButton.addEventListener('click', (event)=>{
-    
-    event.preventDefault()
-    sortCardsByAlphabet()
+    }
 })
-
-
 
 
 function getCardElement(elem){
@@ -327,7 +304,6 @@ function upFavoritCards(){
         const card = getCardElement(item);
         const parent = card.parentElement;
 
-        // Перемещаем текущую карточку перед первой карточкой внутри родителя
         parent.insertBefore(card, parent.firstElementChild);
     });
 
@@ -336,7 +312,7 @@ function upFavoritCards(){
 const favorits = document.querySelectorAll('div.favoritIcon')
 favorits.forEach((item)=>{
     item.addEventListener('click',(event)=>{
-
+        console.log(item);
         const card = event.target.closest('.card')
         const favoritDiv = card.querySelector('.favoritIcon.heart')
         const paths = card.querySelectorAll('path')
@@ -355,7 +331,8 @@ favorits.forEach((item)=>{
 
 
 
-let markers = [{
+let markers = [
+    {
     title : 'drugs market',
     pos:{
         lat : 50.46484195751556,
@@ -407,7 +384,7 @@ async function initMap() {
 }
 
 let map;
-initMap();
+
 let mapMarkers = []
 
 

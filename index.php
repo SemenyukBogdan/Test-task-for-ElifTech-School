@@ -1,4 +1,7 @@
 <?php
+error_reporting(E_ALL & ~E_DEPRECATED);
+
+ini_set('display_errors', 'Off');
 require_once 'databaseAPI.php';
 
 $cartTemplate = file_get_contents("./view/components/cart.html");
@@ -62,17 +65,17 @@ foreach ($res as $item){
                 <button class="btn btn-primary" type="button">etc.</button>
                 <button class="btn btn-primary" type="button">etc.</button>
             </div>
-            <div class="btn-group dropdown">
-                <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    sort by
-                </button>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" id="sortByLetter" href="#">letter</a></li>
-                    <li><a class="dropdown-item" id="sortByPrice" href="#">price</a></li>
-                </ul>
+            <div>
+                <select class="form-select sort-select mt-2" aria-label="Default select example">
+                    <option selected>sort by</option>
+                    <option id="sortByLetter" value="1">alphabet</option>
+                    <option id="sortByPrice" value="2">from low to high-cost</option>
+                    <option id="sortByPriceR" value="3">from high to low-cost</option>
+                </select>
+
             </div>
         </div>
-
+        
         <section class="cards col-md-10 col-sm-8">
         <?php
         echo  $template;

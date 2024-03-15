@@ -81,7 +81,7 @@ class databaseAPI
 
             $stmt->bindParam(':order_id', $order_id);
             $stmt->bindParam(':product_id',$product_id);
-            $stmt->bindParam(':quantity  ',$quantity);
+            $stmt->bindParam(':quantity',$quantity);
             $stmt->execute();
 
             return $this->conn->lastInsertId();
@@ -102,7 +102,7 @@ class databaseAPI
             $stmt->execute();
 
             $order_id = $this->conn->lastInsertId();
-            echo "Order succesfully created. ID: ${customerId}";
+            echo "Order succesfully created. ID: ${customerId}<br>";
             return $order_id;
         } catch (PDOException $e) {
             echo "Error adding New Order: " . $e->getMessage();
@@ -128,10 +128,10 @@ class databaseAPI
             $stmt->execute();
 
             $customer_id = $this->conn->lastInsertId();
-            echo "New Customer added successfully. ID: ${customer_id}";
+            echo "New Customer added successfully. ID: ${customer_id}" . '<br>';
             return $customer_id;
         } catch (PDOException $e) {
-            echo "Error adding New Customer: " . $e->getMessage();
+            echo "Error adding New Customer: " . $e->getMessage() . '<br>';
         }
     }
 }
